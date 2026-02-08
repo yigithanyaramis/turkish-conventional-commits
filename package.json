@@ -1,0 +1,86 @@
+{
+  "name": "turkish-conventional-commits",
+  "displayName": "Turkish Conventional Commits",
+  "description": "Conventional Commits v1.0.0 uyumlu Türkçe commit mesajı üretici. Gemini 2.5 Flash destekli.",
+  "version": "1.0.0",
+  "publisher": "turkish-conventional-commits",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "SCM Providers",
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "turkishCommits.generate",
+        "title": "Türkçe Commit Mesajı Üret",
+        "icon": "$(sparkle)"
+      }
+    ],
+    "menus": {
+      "scm/title": [
+        {
+          "command": "turkishCommits.generate",
+          "group": "navigation",
+          "when": "scmProvider == git"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Turkish Conventional Commits",
+      "properties": {
+        "turkishCommits.enableGemini": {
+          "type": "boolean",
+          "default": true,
+          "description": "Gemini API kullanılsın mı? Kapatılırsa sadece şablon tabanlı mesaj üretilir.",
+          "order": 0
+        },
+        "turkishCommits.geminiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Google Gemini API anahtarı"
+        },
+        "turkishCommits.includeScope": {
+          "type": "boolean",
+          "default": true,
+          "description": "Commit mesajına kapsam eklensin mi"
+        },
+        "turkishCommits.maxDiffLength": {
+          "type": "number",
+          "default": 8000,
+          "description": "Gemini'ye gönderilecek maksimum diff karakter sayısı",
+          "order": 3
+        },
+        "turkishCommits.maxOutputTokens": {
+          "type": "number",
+          "default": 8192,
+          "description": "Gemini'nin üretebileceği maksimum token sayısı (thinking + çıktı). Mesajlar kesiliyorsa artırın.",
+          "minimum": 128,
+          "maximum": 65536,
+          "order": 4
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node",
+    "watch": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --watch",
+    "test": "mocha --require ts-node/register 'src/test/**/*.test.ts'",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.22.0",
+    "esbuild": "^0.19.0",
+    "fast-check": "^3.15.0",
+    "mocha": "^10.2.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.0"
+  }
+}
