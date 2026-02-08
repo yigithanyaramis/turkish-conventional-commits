@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import { getDiff } from './gitService';
 import { generateCommitMessage } from './geminiService';
 import { generateFallbackMessage } from './fallbackGenerator';
+import { GeminiModel } from './types';
 
 export function activate(context: vscode.ExtensionContext): void {
   const disposable = vscode.commands.registerCommand(
@@ -23,6 +24,7 @@ export function activate(context: vscode.ExtensionContext): void {
       const includeScope = config.get<boolean>('includeScope', true);
       const maxDiffLength = config.get<number>('maxDiffLength', 8000);
       const maxOutputTokens = config.get<number>('maxOutputTokens', 8192);
+      const geminiModel = config.get<GeminiModel>('geminiModel', 'gemini-2.5-flash');
 
       await vscode.window.withProgress(
         {
@@ -58,7 +60,8 @@ export function activate(context: vscode.ExtensionContext): void {
                 diffResult.diff,
                 diffResult.stat,
                 geminiApiKey,
-                maxOutputTokens
+                maxOutputTokens,
+                geminiModel
               );
             } catch (error) {
               const message =

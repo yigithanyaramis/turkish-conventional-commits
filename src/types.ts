@@ -25,9 +25,17 @@ export interface GeminiResponse {
   };
 }
 
+export type GeminiModel =
+  | 'gemini-3-flash-preview'
+  | 'gemini-2.5-flash'
+  | 'gemini-2.5-flash-lite'
+  | 'gemini-2.0-flash'
+  | 'gemini-2.0-flash-lite';
+
 export interface ExtensionConfig {
   enableGemini: boolean;
   geminiApiKey: string;
+  geminiModel: GeminiModel;
   includeScope: boolean;
   maxDiffLength: number;
   maxOutputTokens: number;

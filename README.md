@@ -1,6 +1,16 @@
 # Turkish Conventional Commits
 
-Conventional Commits v1.0.0 spesifikasyonuna tam uyumlu, Türkçe commit mesajı üreten bir VS Code eklentisi. Google Gemini 2.5 Flash ile çalışır.
+Conventional Commits v1.0.0 spesifikasyonuna tam uyumlu, Türkçe commit mesajı üreten bir VS Code eklentisi. Google Gemini modelleriyle çalışır.
+
+## Desteklenen modeller
+
+| Model | Özellik |
+|---|---|
+| `gemini-3-flash-preview` | En yeni nesil model (önizleme) |
+| `gemini-2.5-flash` | En gelişmiş kararlı model, yüksek kaliteli çıktı (varsayılan) |
+| `gemini-2.5-flash-lite` | Hızlı ve ekonomik, iyi kalite |
+| `gemini-2.0-flash` | Hızlı ve dengeli performans |
+| `gemini-2.0-flash-lite` | En hızlı ve en ekonomik |
 
 Source Control panelindeki butona tıklayın, değişiklikleriniz analiz edilsin, commit mesajınız hazır olsun.
 
@@ -44,9 +54,12 @@ Ayarlar > Extensions > Turkish Conventional Commits yolundan erişebilirsiniz.
 |---|---|---|
 | `turkishCommits.enableGemini` | Gemini API kullanılsın mı | `true` |
 | `turkishCommits.geminiApiKey` | Google Gemini API anahtarı | `""` |
+| `turkishCommits.geminiModel` | Kullanılacak Gemini modeli | `"gemini-2.5-flash"` |
 | `turkishCommits.includeScope` | Commit mesajına kapsam eklensin mi | `true` |
 | `turkishCommits.maxDiffLength` | Gemini'ye gönderilecek maksimum diff karakter sayısı | `8000` |
 | `turkishCommits.maxOutputTokens` | Gemini'nin üretebileceği maksimum token sayısı (thinking + çıktı) | `8192` |
+
+Model seçimi için `turkishCommits.geminiModel` ayarını kullanın. Varsayılan olarak `gemini-2.5-flash` kullanılır.
 
 Gemini'yi kullanmak istemiyorsanız `turkishCommits.enableGemini` ayarını kapatın. Bu durumda dosya durumuna göre basit şablon mesajları üretilir.
 

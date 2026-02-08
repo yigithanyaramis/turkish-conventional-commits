@@ -1,8 +1,11 @@
 import * as https from 'node:https';
-import { GeminiResponse } from './types';
+import { GeminiModel, GeminiResponse } from './types';
 
 const GEMINI_ENDPOINT = 'generativelanguage.googleapis.com';
-const GEMINI_PATH = '/v1beta/models/gemini-2.5-flash:generateContent';
+
+function getModelPath(model: GeminiModel): string {
+  return `/v1beta/models/${model}:generateContent`;
+}
 
 const SYSTEM_PROMPT = `Sen deneyimli bir yazılımcısın. Sana verilen git diff çıktısını analiz edip Conventional Commits v1.0.0 spesifikasyonuna tam uyumlu bir commit mesajı üreteceksin. Mesaj, bir insan geliştiricinin elle yazacağı gibi doğal ve anlaşılır olmalı.
 
@@ -220,10 +223,11 @@ export async function generateCommitMessage(
   diff: string,
   stat: string,
   apiKey: string,
-  maxOutputTokens: number = 8192
+  maxOutputTokens: number = 8192,
+  model: GeminiModel = 'gemini-2.5-flash'
 ): Promise<string> {
   const requestBody = buildRequestBody(diff, stat, maxOutputTokens);
-  const path = `${GEMINI_PATH}?key=${apiKey}`;
+  const path = `${getModelPath(model)}?key=${apiKey}`;
 
   const options: https.RequestOptions = {
     hostname: GEMINI_ENDPOINT,

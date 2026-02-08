@@ -1,8 +1,8 @@
 {
   "name": "turkish-conventional-commits",
   "displayName": "Turkish Conventional Commits",
-  "description": "Conventional Commits v1.0.0 uyumlu Türkçe commit mesajı üretici. Gemini 2.5 Flash destekli.",
-  "version": "1.0.0",
+  "description": "Conventional Commits v1.0.0 uyumlu Türkçe commit mesajı üretici. Gemini 3 Flash Preview, 2.5 Flash, 2.5 Flash Lite, 2.0 Flash ve 2.0 Flash Lite destekli.",
+  "version": "1.1.0",
   "publisher": "turkish-conventional-commits",
   "engines": {
     "vscode": "^1.85.0"
@@ -42,18 +42,40 @@
         "turkishCommits.geminiApiKey": {
           "type": "string",
           "default": "",
-          "description": "Google Gemini API anahtarı"
+          "description": "Google Gemini API anahtarı",
+          "order": 1
+        },
+        "turkishCommits.geminiModel": {
+          "type": "string",
+          "default": "gemini-2.5-flash",
+          "enum": [
+            "gemini-3-flash-preview",
+            "gemini-2.5-flash",
+            "gemini-2.5-flash-lite",
+            "gemini-2.0-flash",
+            "gemini-2.0-flash-lite"
+          ],
+          "enumDescriptions": [
+            "Gemini 3 Flash Preview — en yeni nesil model (önizleme)",
+            "Gemini 2.5 Flash — en gelişmiş kararlı model, yüksek kaliteli çıktı",
+            "Gemini 2.5 Flash Lite — hızlı ve ekonomik, iyi kalite",
+            "Gemini 2.0 Flash — hızlı ve dengeli performans",
+            "Gemini 2.0 Flash Lite — en hızlı ve en ekonomik"
+          ],
+          "description": "Kullanılacak Gemini modeli",
+          "order": 2
         },
         "turkishCommits.includeScope": {
           "type": "boolean",
           "default": true,
-          "description": "Commit mesajına kapsam eklensin mi"
+          "description": "Commit mesajına kapsam eklensin mi",
+          "order": 3
         },
         "turkishCommits.maxDiffLength": {
           "type": "number",
           "default": 8000,
           "description": "Gemini'ye gönderilecek maksimum diff karakter sayısı",
-          "order": 3
+          "order": 4
         },
         "turkishCommits.maxOutputTokens": {
           "type": "number",
@@ -61,7 +83,7 @@
           "description": "Gemini'nin üretebileceği maksimum token sayısı (thinking + çıktı). Mesajlar kesiliyorsa artırın.",
           "minimum": 128,
           "maximum": 65536,
-          "order": 4
+          "order": 5
         }
       }
     }
