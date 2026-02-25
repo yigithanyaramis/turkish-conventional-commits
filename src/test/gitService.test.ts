@@ -61,6 +61,14 @@ describe('gitService', () => {
       assert.strictEqual(result[0].filePath, 'assets/old.png');
       assert.strictEqual(result[0].status, 'deleted');
     });
+
+    it('should handle binary file modifications', () => {
+      const stat = ' assets/logo.png | Bin 1234 -> 5678 bytes\n 1 file changed, 0 insertions(+), 0 deletions(-)';
+      const result = parseStat(stat);
+      assert.strictEqual(result.length, 1);
+      assert.strictEqual(result[0].filePath, 'assets/logo.png');
+      assert.strictEqual(result[0].status, 'modified');
+    });
   });
 
   describe('truncateDiff', () => {
