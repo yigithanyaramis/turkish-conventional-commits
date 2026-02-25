@@ -47,8 +47,11 @@ function detectFileStatus(changeInfo: string): FileStatus {
   if (/Bin\s+0\s*->/.test(changeInfo)) {
     return 'added';
   }
-  if (/Bin\s+\d+\s*->\s*0/.test(changeInfo)) {
+  if (/Bin\s+\d+\s*->\s*0\s/.test(changeInfo)) {
     return 'deleted';
+  }
+  if (/Bin\s/.test(changeInfo)) {
+    return 'modified';
   }
 
   const hasPlus = changeInfo.includes('+');

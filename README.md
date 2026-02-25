@@ -38,12 +38,12 @@ Oluşan `.vsix` dosyasını yüklemek için:
 
 - `Ctrl+Shift+P` (macOS: `Cmd+Shift+P`) ile komut paletini açın
 - "Extensions: Install from VSIX..." komutunu çalıştırın
-- `turkish-conventional-commits-1.0.0.vsix` dosyasını seçin
+- `turkish-conventional-commits-1.1.0.vsix` dosyasını seçin
 
 Ya da terminalden:
 
 ```bash
-code --install-extension turkish-conventional-commits-1.0.0.vsix
+code --install-extension turkish-conventional-commits-1.1.0.vsix
 ```
 
 ## Yapılandırma
